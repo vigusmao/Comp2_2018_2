@@ -17,24 +17,25 @@ public class Principal {
             return -1;
         }
 
-        int numeroAusente = -1;  // não encontrei ainda
+        int numeroAusente = -1;  // não encontrei ainda nenhum ausente
 
         for (int candidato = 0; candidato <= n; candidato++) {
-            boolean encontreiNoArray = false;
+            boolean localizeiNoArray = false;
             for (int pos = 0; pos < n; pos++) {
                 if (numeros[pos] == candidato) {
-                    encontreiNoArray = true;
+                    localizeiNoArray = true;
                     break;
                 }
             }
-            if (!encontreiNoArray) {
+            if (!localizeiNoArray) {
                 if (numeroAusente == -1) {
                     numeroAusente = candidato;
                 } else {
-                    return -1;  // mais de um ausente!!
+                    return -1;  // mais de um ausente encontrado!!
                 }
             }
         }
+
         return numeroAusente;
     }
 }
