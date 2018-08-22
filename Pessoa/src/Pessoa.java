@@ -6,7 +6,7 @@ import java.util.Date;
  */
 public class Pessoa {
 
-    private String nome;
+    protected String nome;
     private long cpf;
     private final int anoDeNascimento;
 
@@ -17,8 +17,7 @@ public class Pessoa {
 
     /** Retorna a idade da pessoa no último dia do ano corrente. */
     public int getIdade() {
-        Calendar hoje = Calendar.getInstance();
-        int anoCorrente = hoje.get(Calendar.YEAR);
+        int anoCorrente = Utils.getAnoCorrente();
         return 0;  // ToDo
     }
 
