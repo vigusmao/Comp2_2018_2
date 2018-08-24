@@ -12,25 +12,51 @@ public class Aluno extends Pessoa {
         this.conceitosDigitados = 0;
     }
 
+    /**
+     * Inclui um novo conceito no histórico do aluno para o ano corrente.
+     * @param disciplina a disciplina desejada
+     * @param nota a nota
+     * @param semestre o semestre (do ano corrente!!) desejado
+     * @param quantCreditos a quantidade de créditos obtidos nessa disciplina
+     */
     public void incluirConceito(String disciplina, float nota,
-                                int semestre) {
+                                int semestre, int quantCreditos) {
         Conceito novoConceito = new Conceito();
         novoConceito.disciplina = disciplina;
         novoConceito.nota = nota;
         novoConceito.ano = Utils.getAnoCorrente();
         novoConceito.semestre = semestre;
+        novoConceito.quantCreditos = quantCreditos;
         this.conceitos[this.conceitosDigitados++] = novoConceito;
+        atualizarCRA();
     }
 
-    public String getHistorico() {
-        String historico = "Aluno: " + this.nome;
+    private void atualizarCRA() {
+        float totalNotas = 0;
         for (Conceito conceito : this.conceitos) {
             if (conceito == null) {
                 break;
             }
-            historico = historico + "\n" + conceito.toString();
+            totalNotas += conceito.nota;
         }
-        return historico;
+        this.cra = totalNotas / this.conceitosDigitados;
+    }
+
+    public String getHistorico() {
+        StringBuilder sbHistorico = new StringBuilder();
+        sbHistorico.append("Aluno: ")
+                .append(this.nome);
+        for (Conceito conceito : this.conceitos) {
+            if (conceito == null) {
+                break;
+            }
+            sbHistorico.append("\n").append(conceito.toString());
+        }
+        return sbHistorico.toString();
+    }
+
+    public float getCRA() {
+        return this.cra;
     }
 
     private class Conceito {
@@ -38,6 +64,7 @@ public class Aluno extends Pessoa {
         float nota;
         int ano;
         int semestre;
+        int quantCreditos;
 
         @Override
         public String toString() {
