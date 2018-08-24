@@ -22,9 +22,12 @@ public class Aluno extends Pessoa {
         this.conceitos[this.conceitosDigitados++] = novoConceito;
     }
 
-    public String imprimirHistorico() {
+    public String getHistorico() {
         String historico = "Aluno: " + this.nome;
         for (Conceito conceito : this.conceitos) {
+            if (conceito == null) {
+                break;
+            }
             historico = historico + "\n" + conceito.toString();
         }
         return historico;
