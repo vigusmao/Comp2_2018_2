@@ -1,7 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class AlunoTest {
 
@@ -22,7 +22,8 @@ public class AlunoTest {
         this.aluno.incluirConceito("Comp1", 8, 1, 6);
         assertEquals("O CRA deve ser atualizado quando um novo conceito é lançado!", 8f, aluno.getCRA(), DELTA);
         this.aluno.incluirConceito("MatComb", 3, 1, 4);
-        assertEquals("O CRA deve ser a média aritmética de todos os conceitos ", 5.5f, aluno.getCRA(), DELTA);
+        assertEquals("O CRA deve ser a média de todos os conceitos " +
+                "(usando os créditos como peso)", 6f, aluno.getCRA(), DELTA);
     }
 
     @Test

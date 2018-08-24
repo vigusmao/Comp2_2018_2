@@ -32,14 +32,16 @@ public class Aluno extends Pessoa {
     }
 
     private void atualizarCRA() {
-        float totalNotas = 0;
+        int totalCreditos = 0;
+        float totalPonderadoNotas = 0;
         for (Conceito conceito : this.conceitos) {
             if (conceito == null) {
                 break;
             }
-            totalNotas += conceito.nota;
+            totalPonderadoNotas += conceito.nota * conceito.quantCreditos;
+            totalCreditos += conceito.quantCreditos;
         }
-        this.cra = totalNotas / this.conceitosDigitados;
+        this.cra = totalPonderadoNotas / totalCreditos;
     }
 
     public String getHistorico() {
