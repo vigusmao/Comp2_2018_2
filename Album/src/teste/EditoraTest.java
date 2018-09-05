@@ -37,6 +37,6 @@ public class EditoraTest {
 
     @Test
     public void adquirirFigurinhaTest() {
-        
+
     }
 }

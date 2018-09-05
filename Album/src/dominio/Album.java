@@ -17,13 +17,16 @@ public class Album {
 
     private int contRepetidas;
 
-
+    /** O total de figurinhas do álbum completo.
+     */
+    private final int tamanho;
 
     /**
      * @param tamanho O número total de figurinhas do álbum.
      */
     public Album(int tamanho) {
         super();
+        this.tamanho = tamanho;
         this.figurinhas = new boolean[tamanho + 1];  // descartaremos a posição 0
         this.repetidas = new int[tamanho + 1];  // idem
         this.contFigurinhas = 0;
@@ -63,7 +66,7 @@ public class Album {
      * @return true, caso esteja cheio; false, caso contrário.
      */
     public boolean isCheio() {
-        return false;  // ToDo IMPLEMENT ME!!!
+        return this.contFigurinhas == this.tamanho;
     }
 
     /**
@@ -74,7 +77,12 @@ public class Album {
      * @param figurinhaQueSai a figurinha que é dada em troca
      */
     public void trocarFigurinha(int figurinhaQueEntra, int figurinhaQueSai) {
-        // ToDo IMPLEMENT ME!!!
+        if (getContadorRepetidas(figurinhaQueSai) == 0) {
+            return;  // a troca não será possível
+        }
+        receberFigurinha(figurinhaQueEntra);
+        this.repetidas[figurinhaQueSai]--;
+        this.contRepetidas--;
     }
 
     /**

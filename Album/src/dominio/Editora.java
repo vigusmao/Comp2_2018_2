@@ -4,8 +4,8 @@ import java.util.Random;
 
 /**
  * Implementa a editora responsável pela publicação de um único álbum de figurinhas.
- * Possui métodos para compra de pacotinhos de figurinhas e figurinhas específicas para álbuns suficientemente
- * preenchidos.
+ * Possui métodos para compra de pacotinhos de figurinhas e figurinhas específicas
+ * para álbuns suficientemente preenchidos.
  */
 public class Editora {
 
