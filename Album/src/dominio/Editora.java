@@ -1,15 +1,38 @@
 package dominio;
 
+import java.util.Random;
+
+/**
+ * Implementa a editora responsável pela publicação de um único álbum de figurinhas.
+ * Possui métodos para compra de pacotinhos de figurinhas e figurinhas específicas para álbuns suficientemente
+ * preenchidos.
+ */
 public class Editora {
 
     public final static int PERCENTUAL_MINIMO_PARA_COMPRAS_ESPECIFICAS = 90;
 
+    private final int figurinhasPorPacotinho;
+    private final int totalFigurinhasNoAlbum;
+
+    private final Random random;
+
+    public Editora(int figurinhasPorPacotinho, int totalFigurinhasNoAlbum) {
+        this.figurinhasPorPacotinho = figurinhasPorPacotinho;
+        this.totalFigurinhasNoAlbum = totalFigurinhasNoAlbum;
+        this.random = new Random();
+    }
+
     /**
-     * Retorno um pacotinho aleatório de figurinhas.
+     * Retorna um pacotinho aleatório de figurinhas.
      * @return um array de inteiros representando as figurinhas adquiridas.
      */
     public int[] adquirirPacotinhoAleatorio() {
-        return null;  // ToDo IMPLEMENT ME!
+        int[] pacotinho = new int[this.figurinhasPorPacotinho];
+        for (int i = 0; i < this.figurinhasPorPacotinho; i++) {
+            int figurinha = random.nextInt(this.totalFigurinhasNoAlbum) + 1;
+            pacotinho[i] = figurinha;
+        }
+        return pacotinho;
     }
 
     /**
