@@ -3,7 +3,6 @@ package teste;
 import dominio.Album;
 import dominio.Figurinha;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -26,37 +25,37 @@ public class AlbumTest {
     @Test
     public void testePreenchimento() {
         assertEquals("O álbum precisa estar vazio inicialmente",
-                0, album.getContadorFigurinhas());
+                0, album.getContadorItems());
 
         Figurinha novaFig = new Figurinha(15);
-        album.receberFigurinha(novaFig);
+        album.receberItem(novaFig);
 
         assertTrue("O álbum deve conter figurinhas que foram recebidas",
-                album.possuiFigurinha(15));
+                album.possuiItem(15));
         assertEquals("O álbum não deve considerar como repetida a primeira " +
                 "figurinha recebida de cada posição",
-                0, album.getContadorRepetidas(15));
+                0, album.getContadorRepetidos(15));
 
         assertEquals("O total de figurinhas deve refletir a quantidade de figurinhas " +
                         "distintas já recebidas",
-                1, album.getContadorFigurinhas());
+                1, album.getContadorItems());
 
         Figurinha outraFig = new Figurinha(16);
-        album.receberFigurinha(outraFig);
+        album.receberItem(outraFig);
 
         assertEquals("O total de figurinhas deve refletir a quantidade de figurinhas " +
                         "distintas já recebidas",
-                2, album.getContadorFigurinhas());
+                2, album.getContadorItems());
 
         Figurinha figRepetida = new Figurinha(15);
-        album.receberFigurinha(figRepetida);
+        album.receberItem(figRepetida);
 
         assertEquals("O total de figurinhas deve refletir a quantidade de figurinhas " +
                         "distintas já recebidas",
-                2, album.getContadorFigurinhas());
+                2, album.getContadorItems());
 
         assertEquals("O álbum deve computar corretamente o total de repetidas",
-                1, album.getContadorRepetidas(15));
+                1, album.getContadorRepetidos(15));
     }
 
     @Test
@@ -65,13 +64,13 @@ public class AlbumTest {
 
         for (int i = 1; i < tamanho; i++) {
             Figurinha fig = new Figurinha(i, "urlDaImagemI");
-            album.receberFigurinha(fig);
+            album.receberItem(fig);
         }
         assertFalse("O álbum não está cheio se ainda faltam figurinhas",
                 album.isCheio());
 
         Figurinha fig = new Figurinha(tamanho, "urlQualquer");
-        album.receberFigurinha(fig);
+        album.receberItem(fig);
         assertTrue("O álbum precisa retornar que está cheio quando possuir " +
                 "todas as figurinhas",
                 album.isCheio());
@@ -81,44 +80,44 @@ public class AlbumTest {
     public void trocarFigurinhaTestParaSituacaoNormal() {
         preencherAlbumComAlgumasFigurinhas();
 
-        int quantInicialFigurinhas = album.getContadorFigurinhas();
-        int quantInicialRepetidas = album.getContadorRepetidas();
+        int quantInicialFigurinhas = album.getContadorItems();
+        int quantInicialRepetidas = album.getContadorRepetidos();
 
         Figurinha figurinhaInedita = new Figurinha(
                 fimSequencia + 1);
-        album.trocarFigurinha(figurinhaInedita, figurinhaMuitoRepetida);
+        album.trocarItem(figurinhaInedita, figurinhaMuitoRepetida);
 
         assertEquals("Quando trocamos uma figurinha repetida por uma que é inédita, " +
                 "o álbum deve acrescentá-la normalmente",
-                quantInicialFigurinhas + 1, album.getContadorFigurinhas());
+                quantInicialFigurinhas + 1, album.getContadorItems());
         assertEquals("Quando trocamos uma figurinha repetida, o total de repetidas deve " +
                 "ser decrementado",
-                quantInicialRepetidas - 1, album.getContadorRepetidas());
+                quantInicialRepetidas - 1, album.getContadorRepetidos());
         assertTrue("A figurinha recebida na troca deve ser incluída no álbum",
-                album.possuiFigurinha(figurinhaInedita.getPosicao()));
+                album.possuiItem(figurinhaInedita.getPosicao()));
     }
 
     @Test
     public void trocarFigurinhaTestParaSituacaoDeReceberFigurinhaQueJaPossui() {
         preencherAlbumComAlgumasFigurinhas();
 
-        int quantInicialFigurinhas = album.getContadorFigurinhas();
-        int quantInicialRepetidas = album.getContadorRepetidas();
+        int quantInicialFigurinhas = album.getContadorItems();
+        int quantInicialRepetidas = album.getContadorRepetidos();
 
         Figurinha figurinhaPoucoRepetida = new Figurinha(inicioSequencia);
-        int quantInicialRepetidasDaFigurinhaQueSeraDada = album.getContadorRepetidas(
+        int quantInicialRepetidasDaFigurinhaQueSeraDada = album.getContadorRepetidos(
                 figurinhaMuitoRepetida.getPosicao());
-        int quantInicialRepetidasDaFigurinhaQueSeraRecebida = album.getContadorRepetidas(
+        int quantInicialRepetidasDaFigurinhaQueSeraRecebida = album.getContadorRepetidos(
                 figurinhaPoucoRepetida.getPosicao());
-        album.trocarFigurinha(figurinhaPoucoRepetida, figurinhaMuitoRepetida);
+        album.trocarItem(figurinhaPoucoRepetida, figurinhaMuitoRepetida);
 
-        assertEquals(quantInicialFigurinhas, album.getContadorFigurinhas());
-        assertEquals(quantInicialRepetidas, album.getContadorRepetidas());
+        assertEquals(quantInicialFigurinhas, album.getContadorItems());
+        assertEquals(quantInicialRepetidas, album.getContadorRepetidos());
 
         assertEquals(quantInicialRepetidasDaFigurinhaQueSeraDada - 1,
-                album.getContadorRepetidas(figurinhaMuitoRepetida.getPosicao()));
+                album.getContadorRepetidos(figurinhaMuitoRepetida.getPosicao()));
         assertEquals(quantInicialRepetidasDaFigurinhaQueSeraRecebida + 1,
-                album.getContadorRepetidas(figurinhaPoucoRepetida.getPosicao()));
+                album.getContadorRepetidos(figurinhaPoucoRepetida.getPosicao()));
     }
 
     @Test
@@ -143,10 +142,10 @@ public class AlbumTest {
     private void preencherAlbumComAlgumasFigurinhas() {
         for (int i = inicioSequencia; i <= fimSequencia; i++) {
             Figurinha fig = new Figurinha(i);
-            album.receberFigurinha(fig);
+            album.receberItem(fig);
         }
-        album.receberFigurinha(figurinhaMuitoRepetida);
-        album.receberFigurinha(figurinhaMuitoRepetida);
-        album.receberFigurinha(figurinhaMuitoRepetida);
+        album.receberItem(figurinhaMuitoRepetida);
+        album.receberItem(figurinhaMuitoRepetida);
+        album.receberItem(figurinhaMuitoRepetida);
     }
 }

@@ -3,62 +3,62 @@ package dominio;
 public class Album {
 
     /**
-     * Um array de Figurinhas, onde na posição k teremos a figurinha
-     * cujo atributo `posicao` é k; ou null, caso não tenhamos a figura
+     * Um array de Colecionavel, onde na posição k teremos o item
+     * cujo atributo `posicao` é k; ou null, caso não tenhamos o item
      * em questão.
      */
-    private Figurinha[] figurinhas;
+    private Colecionavel[] items;
 
-    private int contFigurinhas;
+    private int contItems;
 
-    /** Um array de inteiros, onde a posição k indicará a quantidade de repetidas da
-     * figurinha k.
+    /** Um array de inteiros, onde a posição k indicará a quantidade de repetidos do
+     * item k.
      */
-    private int[] repetidas;
+    private int[] repetidos;
 
-    private int contRepetidas;
+    private int contRepetidos;
 
-    /** O total de figurinhas do álbum completo.
+    /** O total de items do álbum completo.
      */
     private final int tamanho;
 
     /**
-     * @param tamanho O número total de figurinhas do álbum.
+     * @param tamanho O número total de items do álbum.
      */
     public Album(int tamanho) {
         super();
         this.tamanho = tamanho;
-        this.figurinhas = new Figurinha[tamanho + 1];  // descartaremos a posição 0
-        this.repetidas = new int[tamanho + 1];  // idem
-        this.contFigurinhas = 0;
+        this.items = new Colecionavel[tamanho + 1];  // descartaremos a posição 0
+        this.repetidos = new int[tamanho + 1];  // idem
+        this.contItems = 0;
     }
 
     /**
-     * Retorna se determinada figurinha existe no álbum.
-     * @param numeroDaFigurinha a figurinha desejada
-     * @return true, se a figurinha existir no álbum; false, caso contrário
+     * Retorna se determinado item existe no álbum.
+     * @param posicao a posição do item desejado
+     * @return true, se o item desejado existir no álbum; false, caso contrário
      */
-    public boolean possuiFigurinha(int numeroDaFigurinha) {
-        return this.figurinhas[numeroDaFigurinha] != null;
+    public boolean possuiItem(int posicao) {
+        return this.items[posicao] != null;
     }
 
     /**
-     * Processa uma figurinha recém-adquirida, acrescento-a ao álbum, caso
-     * seja inédita, ou ao monte de figurinhas repetidas, caso não seja.
+     * Processa um item recém-adquirido, acrescentando-o ao álbum, caso
+     * seja inédito, ou ao monte de items repetidos, caso não seja.
      *
-     * @param figurinha A figurinha a ser recebida.
+     * @param item O item a ser recebido.
      */
-    public void receberFigurinha(Figurinha figurinha) {
-        int posicao = figurinha.getPosicao();
-        if (this.figurinhas[posicao] != null) {
-            // figurinha repetida!
-            this.repetidas[posicao]++;
-            this.contRepetidas++;
+    public void receberItem(Colecionavel item) {
+        int posicao = item.getPosicao();
+        if (this.items[posicao] != null) {
+            // item repetido!
+            this.repetidos[posicao]++;
+            this.contRepetidos++;
 
         } else {
-            // figurinha inédita!
-            this.figurinhas[posicao] = figurinha;
-            this.contFigurinhas++;
+            // item inédito!
+            this.items[posicao] = item;
+            this.contItems++;
         }
     }
 
@@ -68,50 +68,50 @@ public class Album {
      * @return true, caso esteja cheio; false, caso contrário.
      */
     public boolean isCheio() {
-        return this.contFigurinhas == this.tamanho;
+        return this.contItems == this.tamanho;
     }
 
     /**
-     * Recebe uma figurinha, e fornece outra em troca.
-     * A figurinha que sai precisa ser uma figurinha repetida; do contrário,
+     * Recebe um item e fornece outro em troca.
+     * O item que sai precisa ser um item repetida; do contrário,
      * o método não fará nada.
-     * @param figurinhaQueEntra a nova figurinha (não precisa ser inédita)
-     * @param figurinhaQueSai a figurinha que é dada em troca
+     * @param itemQueEntra o nova item (não precisa ser inédito)
+     * @param itemQueSai o item que é dado em troca
      */
-    public void trocarFigurinha(Figurinha figurinhaQueEntra, Figurinha figurinhaQueSai) {
-        int posicao = figurinhaQueSai.getPosicao();
-        if (getContadorRepetidas(posicao) == 0) {
+    public void trocarItem(Colecionavel itemQueEntra, Colecionavel itemQueSai) {
+        int posicao = itemQueSai.getPosicao();
+        if (getContadorRepetidos(posicao) == 0) {
             return;  // a troca não será possível
         }
-        receberFigurinha(figurinhaQueEntra);
-        this.repetidas[posicao]--;
-        this.contRepetidas--;
+        receberItem(itemQueEntra);
+        this.repetidos[posicao]--;
+        this.contRepetidos--;
     }
 
     /**
-     * @return O total de figurinhas (distintas) que já fazem parte do álbum.
+     * @return O total de items (distintos) que já fazem parte do álbum.
      */
-    public int getContadorFigurinhas() {
-        return this.contFigurinhas;
+    public int getContadorItems() {
+        return this.contItems;
     }
 
     /**
-     * @return O total de figurinhas repetidas.
+     * @return O total de items repetidos.
      */
-    public int getContadorRepetidas() {
-        return this.contRepetidas;
+    public int getContadorRepetidos() {
+        return this.contRepetidos;
     }
 
     /**
-     * @param numeroDaFigurinha O número da figurinha desejada.
-     * @return A quantidade de repetidas da figurinha desejada.
+     * @param posicao A posição do item desejado.
+     * @return A quantidade de repetidos do item desejado.
      */
-    public int getContadorRepetidas(int numeroDaFigurinha) {
-        return this.repetidas[numeroDaFigurinha];
+    public int getContadorRepetidos(int posicao) {
+        return this.repetidos[posicao];
     }
 
     /**
-     * Indica se já é possível solicitar figurinhas específicas à editora, diretamente.
+     * Indica se já é possível solicitar items específicos à editora, diretamente.
      *
      * @return true; caso seja possível; false, caso o álbum ainda não esteja
      *         cheio o suficiente.
@@ -121,12 +121,12 @@ public class Album {
     }
 
     /**
-     * Retorna a figurinha da posição dada.
+     * Retorna o item da posição dada.
      *
      * @param posicao A posição desejada.
-     * @return A Figurinha que ocupa
+     * @return O item que ocupa a posição dada, se existir; ou null, caso contrário
      */
-    public Figurinha getFigurinha(int posicao) {
-        return this.figurinhas[posicao];
+    public Colecionavel getItem(int posicao) {
+        return this.items[posicao];
     }
 }

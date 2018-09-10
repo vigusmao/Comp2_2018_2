@@ -24,7 +24,7 @@ public class Principal {
                 Figurinha[] pacotinho = minhaEditora.adquirirPacotinhoAleatorio();
                 contPacotinhos++;
                 for (Figurinha figurinha : pacotinho) {
-                    album.receberFigurinha(figurinha);
+                    album.receberItem(figurinha);
                     contFigurinhas++;
                 }
             }

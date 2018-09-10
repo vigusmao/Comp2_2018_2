@@ -1,6 +1,6 @@
 package dominio;
 
-public class Figurinha {
+public class Figurinha implements Colecionavel {
 
     private final int posicao;
 
@@ -23,5 +23,13 @@ public class Figurinha {
 
     public int getPosicao() {
         return this.posicao;
+    }
+
+    public float getTamanho() {
+        return this.larguraEmMilimetros * this.alturaEmMilimetros / 100;
+    }
+
+    public String getUrlDaImagem() {
+        return this.urlDaImagem;
     }
 }
