@@ -13,24 +13,35 @@ public class Editora {
 
     private final int figurinhasPorPacotinho;
     private final int totalFigurinhasNoAlbum;
+    private Figurinha[] repositorio;
 
     private final Random random;
 
     public Editora(int figurinhasPorPacotinho, int totalFigurinhasNoAlbum) {
         this.figurinhasPorPacotinho = figurinhasPorPacotinho;
         this.totalFigurinhasNoAlbum = totalFigurinhasNoAlbum;
+        this.repositorio = new Figurinha[totalFigurinhasNoAlbum + 1];
+        inicializarRepositorio();
         this.random = new Random();
+    }
+
+    private void inicializarRepositorio() {
+        for (int i = 1; i <= totalFigurinhasNoAlbum; i++) {
+            Figurinha fig = new Figurinha(i,
+                    String.format("http://fig%d.jpg", i));
+            this.repositorio[i] = fig;
+        }
     }
 
     /**
      * Retorna um pacotinho aleatório de figurinhas.
-     * @return um array de inteiros representando as figurinhas adquiridas.
+     * @return um array de Figurinhas com as figurinhas adquiridas.
      */
-    public int[] adquirirPacotinhoAleatorio() {
-        int[] pacotinho = new int[this.figurinhasPorPacotinho];
+    public Figurinha[] adquirirPacotinhoAleatorio() {
+        Figurinha[] pacotinho = new Figurinha[this.figurinhasPorPacotinho];
         for (int i = 0; i < this.figurinhasPorPacotinho; i++) {
-            int figurinha = random.nextInt(this.totalFigurinhasNoAlbum) + 1;
-            pacotinho[i] = figurinha;
+            int posicao = random.nextInt(this.totalFigurinhasNoAlbum) + 1;
+            pacotinho[i] = repositorio[posicao];
         }
         return pacotinho;
     }

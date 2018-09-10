@@ -2,6 +2,7 @@ package teste;
 
 import dominio.Album;
 import dominio.Editora;
+import dominio.Figurinha;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,13 +25,14 @@ public class EditoraTest {
     public void adquirirPacotinhoAleatorioTest() {
         for (int i = 0; i < 1000; i++) {
             // vamos testar várias vezes, por conta da aleatoriedade
-            int[] pacotinho = editora.adquirirPacotinhoAleatorio();
+            Figurinha[] pacotinho = editora.adquirirPacotinhoAleatorio();
             assertEquals("O pacotinho retornado deve ter o tamanho especificado",
                     figurinhasPorPacote, pacotinho.length);
-            for (int figurinha : pacotinho) {
-                assertTrue("Cada figurinha do pacotinho deve estar no range " +
-                                "de 1 a " + nFigurinhas,
-                        figurinha >= 1 && figurinha <= nFigurinhas);
+            for (Figurinha figurinha : pacotinho) {
+                int posicaoDaFigurinha = figurinha.getPosicao();
+                assertTrue("A posição de cada figurinha do pacotinho deve estar " +
+                                "no range de 1 a " + nFigurinhas,
+                        posicaoDaFigurinha >= 1 && posicaoDaFigurinha <= nFigurinhas);
             }
         }
     }

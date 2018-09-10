@@ -2,6 +2,7 @@ package controle;
 
 import dominio.Album;
 import dominio.Editora;
+import dominio.Figurinha;
 
 public class Principal {
 
@@ -20,9 +21,9 @@ public class Principal {
             int contFigurinhas = 0;
             int contPacotinhos = 0;
             while (!album.isCheio()) {
-                int[] pacotinho = minhaEditora.adquirirPacotinhoAleatorio();
+                Figurinha[] pacotinho = minhaEditora.adquirirPacotinhoAleatorio();
                 contPacotinhos++;
-                for (int figurinha : pacotinho) {
+                for (Figurinha figurinha : pacotinho) {
                     album.receberFigurinha(figurinha);
                     contFigurinhas++;
                 }
