@@ -1,6 +1,6 @@
 1) Crie a interface Vendavel, descrevendo o comportamento esperado
-   dos itens que podem ser vendidos pela sua loja
-   (cada item vendável precisa ter uma descrição e um preço).
+   dos itens que podem ser vendidos pela sua loja: cada item vendável
+   precisa ter uma descrição e um preço.
 
 2) Modifique a classe Loja para que ela não se relacione diretamente
    com a classe Livro, mas sim com a interface Vendavel.
@@ -11,3 +11,18 @@
    será preciso fazer com que a classe Livro explicitamente
    implemente a interface Vendavel. Faça isso.
 
+4) Modifique seu main() para que a loja possa vender também
+   alguns caminhões.
+
+5) Crie a interface Transportador, descrevendo o comportamento esperado
+   de qualquer coisa que se habilite a transportar itens vendidos pela
+   loja: em suma, qualquer transportador precisa ter um método
+   transportar, que recebe um Vendavel e um endereço de entrega.
+
+6) Modifique a classe Loja, de forma que ela possa trabalhar com
+   qualquer transportador, não apenas com caminhões.
+
+7) Para que seu main() continue funcionando, será preciso fazer
+   com que a classe Caminhao implemente a interface Transportador.
+
+8) Crie uma loja que usa uma pessoa como transportador!
