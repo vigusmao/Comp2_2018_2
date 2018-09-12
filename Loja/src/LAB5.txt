@@ -24,5 +24,8 @@
 
 7) Para que seu main() continue funcionando, será preciso fazer
    com que a classe Caminhao implemente a interface Transportador.
+   Faça isso.
 
-8) Crie uma loja que usa uma pessoa como transportador!
+8) Modifique a sua loja para que ela use uma pessoa como transportador!
+
+9) No seu main(), faça a loja vender alguns itens à sua escolha.
