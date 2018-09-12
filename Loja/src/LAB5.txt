@@ -1,0 +1,13 @@
+1) Crie a interface Vendavel, descrevendo o comportamento esperado
+   dos itens que podem ser vendidos pela sua loja
+   (cada item vendável precisa ter uma descrição e um preço).
+
+2) Modifique a classe Loja para que ela não se relacione diretamente
+   com a classe Livro, mas sim com a interface Vendavel.
+   Dessa forma, estaremos fazendo com que a loja possa vender qualquer
+   coisa que seja vendável.
+
+3) Para que seu main(), na classe Principal, continue funcionando,
+   será preciso fazer com que a classe Livro explicitamente
+   implemente a interface Vendavel. Faça isso.
+
