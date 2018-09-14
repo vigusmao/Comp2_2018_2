@@ -4,40 +4,44 @@ public class Loja {
 
     private static final int MAX_ITEMS_ESTOQUE = 1000;
 
-    private Caminhao transportador;
+    private Transportador transportador;
 
-    private Livro[] vitrine;
+    private Vendavel[] vitrine;
 
     private int contItemsNaVitrine;
 
-    public Loja(Caminhao transportador) {
+    public Loja(Transportador transportador) {
         this.transportador = transportador;
-        this.vitrine = new Livro[MAX_ITEMS_ESTOQUE];
+        this.vitrine = new Vendavel[MAX_ITEMS_ESTOQUE];
         this.contItemsNaVitrine = 0;
     }
 
-    public void adicionarItemAVitrine(Livro livro) {
-        this.vitrine[this.contItemsNaVitrine++] = livro;
+    public void adicionarItemAVitrine(Vendavel item) {
+        this.vitrine[this.contItemsNaVitrine++] = item;
     }
 
-    public void efetuarVenda(Livro livro,
+    public void efetuarVenda(Vendavel item,
                              String enderecoDeEntrega,
                              long numeroDoCartaoDeCredito) {
-        descontarValorDoCartao(numeroDoCartaoDeCredito, livro.getPreco());
-        emitirRecibo(livro.getDescricao(), livro.getPreco());
-        transportador.entregar(livro, enderecoDeEntrega);
+        descontarValorDoCartao(numeroDoCartaoDeCredito, item.getPreco());
+        emitirRecibo(item.getDescricao(), item.getPreco());
+        transportador.entregar(item, enderecoDeEntrega);
     }
 
-    public String getVitrine() {
+    public String getVitrineAsString() {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < this.contItemsNaVitrine; i++) {
-            Livro livro = this.vitrine[i];
-            sb.append(livro.getDescricao())
+            Vendavel item = this.vitrine[i];
+            sb.append(item.getDescricao())
               .append(" -- preço: R$")
-              .append(livro.getPreco())
+              .append(item.getPreco())
               .append("\n");
         }
         return sb.toString();
+    }
+
+    public Vendavel[] getVitrine() {
+        return this.vitrine;
     }
 
     private void emitirRecibo(String descricao, float preco) {
@@ -47,11 +51,11 @@ public class Loja {
 
     private void descontarValorDoCartao(
             long numeroDoCartao, float preco) {
-        System.out.printf("Descontando %.2f reais do cartão %l...\n",
+        System.out.printf("Descontando %.2f reais do cartão %d...\n",
                 preco, numeroDoCartao);
     }
 
-    public Livro getItemVitrine(int posicao) {
+    public Vendavel getItemVitrine(int posicao) {
         return this.vitrine[posicao];
     }
 }

@@ -1,6 +1,6 @@
 package modelo;
 
-public class Livro {
+public class Livro implements Vendavel {
 
     private static final float PRECO_DEFAULT = 10;
 
@@ -37,5 +37,12 @@ public class Livro {
 
     public void setAnoPublicacao(int anoPublicacao) {
         this.anoPublicacao = anoPublicacao;
+    }
+
+    public Livro clone() {
+        Livro minhaCopia = new Livro(this.titulo, this.autor);
+        minhaCopia.setAnoPublicacao(this.anoPublicacao);
+        minhaCopia.setPreco(this.preco);
+        return minhaCopia;
     }
 }
