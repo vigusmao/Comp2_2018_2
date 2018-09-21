@@ -1,6 +1,6 @@
 package modelo;
 
-public class Loja {
+public abstract class Loja {
 
     private static final int MAX_ITEMS_ESTOQUE = 1000;
 
@@ -10,7 +10,7 @@ public class Loja {
 
     private int contItemsNaVitrine;
 
-    public Loja(Transportador transportador) {
+    protected Loja(Transportador transportador) {
         this.transportador = transportador;
         this.vitrine = new Vendavel[MAX_ITEMS_ESTOQUE];
         this.contItemsNaVitrine = 0;
@@ -22,11 +22,14 @@ public class Loja {
 
     public void efetuarVenda(Vendavel item,
                              String enderecoDeEntrega,
-                             long numeroDoCartaoDeCredito) {
-        descontarValorDoCartao(numeroDoCartaoDeCredito, item.getPreco());
+                             Pessoa comprador) {
+
+        receberPagamento(comprador, item.getPreco());
         emitirRecibo(item.getDescricao(), item.getPreco());
         transportador.entregar(item, enderecoDeEntrega);
     }
+
+    protected abstract void receberPagamento(Pessoa comprador, float preco);
 
     public String getVitrineAsString() {
         StringBuffer sb = new StringBuffer();
@@ -47,12 +50,6 @@ public class Loja {
     private void emitirRecibo(String descricao, float preco) {
         System.out.printf("Emitindo recibo sobre %s no valor " +
                 "de %.2f reais...\n", descricao, preco);
-    }
-
-    private void descontarValorDoCartao(
-            long numeroDoCartao, float preco) {
-        System.out.printf("Descontando %.2f reais do cartão %d...\n",
-                preco, numeroDoCartao);
     }
 
     public Vendavel getItemVitrine(int posicao) {

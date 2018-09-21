@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.Calendar;
 
-public class Caminhao implements Vendavel, Transportador {
+public class Caminhao extends Veiculo implements Vendavel, Transportador {
 
     private String marca;
 
@@ -32,6 +32,7 @@ public class Caminhao implements Vendavel, Transportador {
         System.out.printf("Levando o item %s de caminhão " +
                 "para o endereço %s...\n",
                 item.getDescricao(), endereco);
+        andar(60);
     }
 
     public float getPreco() {

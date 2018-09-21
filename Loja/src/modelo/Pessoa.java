@@ -8,6 +8,8 @@ public class Pessoa implements Transportador {
 
     private final int anoNascimento;
 
+    private long numeroDoCartaoDeCredito;
+
     public Pessoa(String nome, int anoNascimento) {
         this.nome = nome;
         this.anoNascimento = anoNascimento;
@@ -31,6 +33,14 @@ public class Pessoa implements Transportador {
 
     public int getAnoNascimento() {
         return anoNascimento;
+    }
+
+    public long getNumeroDoCartaoDeCredito() {
+        return numeroDoCartaoDeCredito;
+    }
+
+    public void setNumeroDoCartaoDeCredito(long numeroDoCartaoDeCredito) {
+        this.numeroDoCartaoDeCredito = numeroDoCartaoDeCredito;
     }
 
     public void respirar() {
