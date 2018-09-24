@@ -1,8 +1,6 @@
 package controle;
 
-import dominio.Album;
-import dominio.Editora;
-import dominio.Figurinha;
+import dominio.*;
 
 public class Principal {
 
@@ -10,6 +8,9 @@ public class Principal {
         final int tamanhoAlbum = 400;
         final int figurinhasPorPacote = 3;
         final int nRepeticoes = 1000;
+        final Cartao meuCartao = new Cartao(2222);
+        final Pessoa pessoa = new Pessoa("Ze", 11111);
+        final ContaBancaria conta = new ContaBancaria(pessoa, "Dólar");
 
         Editora minhaEditora = new Editora(figurinhasPorPacote, tamanhoAlbum);
 
@@ -17,14 +18,16 @@ public class Principal {
         long totalFigurinhasCompradasSimulacao = 0;
 
         for (int i = 0; i < nRepeticoes; i++) {
-            Album album = new Album(tamanhoAlbum);
+            Album<Figurinha> album = new Album<>(tamanhoAlbum);
+            Figurinha fig = new Figurinha(6, "bla");
+            album.receberItem(fig);
             int contFigurinhas = 0;
             int contPacotinhos = 0;
             while (!album.isCheio()) {
-                Figurinha[] pacotinho = minhaEditora.adquirirPacotinhoAleatorio();
+                Colecionavel[] pacotinho = minhaEditora.adquirirPacotinhoAleatorio();
                 contPacotinhos++;
-                for (Figurinha figurinha : pacotinho) {
-                    album.receberItem(figurinha);
+                for (Colecionavel figurinha : pacotinho) {
+                    album.receberItem((Figurinha) figurinha);
                     contFigurinhas++;
                 }
             }

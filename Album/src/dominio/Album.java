@@ -1,6 +1,6 @@
 package dominio;
 
-public class Album {
+public class Album<T extends Colecionavel> {
 
     /**
      * Um array de Colecionavel, onde na posição k teremos o item
@@ -8,6 +8,8 @@ public class Album {
      * em questão.
      */
     private Colecionavel[] items;
+
+    private T itemUnico;
 
     private int contItems;
 
@@ -48,7 +50,7 @@ public class Album {
      *
      * @param item O item a ser recebido.
      */
-    public void receberItem(Colecionavel item) {
+    public void receberItem(T item) {
         int posicao = item.getPosicao();
         if (this.items[posicao] != null) {
             // item repetido!
@@ -78,7 +80,7 @@ public class Album {
      * @param itemQueEntra o nova item (não precisa ser inédito)
      * @param itemQueSai o item que é dado em troca
      */
-    public void trocarItem(Colecionavel itemQueEntra, Colecionavel itemQueSai) {
+    public void trocarItem(T itemQueEntra, T itemQueSai) {
         int posicao = itemQueSai.getPosicao();
         if (getContadorRepetidos(posicao) == 0) {
             return;  // a troca não será possível
@@ -126,7 +128,7 @@ public class Album {
      * @param posicao A posição desejada.
      * @return O item que ocupa a posição dada, se existir; ou null, caso contrário
      */
-    public Colecionavel getItem(int posicao) {
-        return this.items[posicao];
+    public T getItem(int posicao) {
+        return (T) this.items[posicao];
     }
 }

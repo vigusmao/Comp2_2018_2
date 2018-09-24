@@ -8,8 +8,9 @@ public class Selo implements Colecionavel {
 
     private String paisDeOrigem;
 
-    public Selo(int posicao) {
+    public Selo(int posicao, String paisDeOrigem) {
         this.posicao = posicao;
+        this.paisDeOrigem = paisDeOrigem;
     }
 
     public int getPosicao() {
