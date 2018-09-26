@@ -20,3 +20,14 @@
 
 4) Modifique seu unit test para ListaSequencial de
    Livros. (Crie uma classe Livro muito básica.)
+
+5) Modifique ListaSequencial de forma que o array
+   seja criado inicialmente com tamanho 16,
+   e não maxCapacity. Quando size for igual a 16 e um
+   add precisar ser feito, você deverá criar um novo array
+   de tamanho 32, copiar o conteúdo do array velho
+   para lá e efetuar a adição do novo elemento,
+   fazendo com que o atributo da ListaSequencial
+   aponte agora para o novo array, liberando assim
+   a memória do array velho. Idem de 32 para 64,
+   para 128, etc., até maxCapacity.
