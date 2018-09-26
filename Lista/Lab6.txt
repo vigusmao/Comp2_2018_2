@@ -1,7 +1,7 @@
 1) Crie uma classe ListaSequencial que herda de Lista
    e que implementa os métodos abstratos de Lista
    usando um array. Isto é, no construtor, você deverá
-   criar um array para Objectcom tamanho igual à
+   criar um array para Object com tamanho igual à
    capacidade máxima informada e depois usar esse array
    para fazer suas adições de elementos, leituras e
    remoções.
