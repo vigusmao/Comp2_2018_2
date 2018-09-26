@@ -1,0 +1,22 @@
+1) Crie uma classe ListaSequencial que herda de Lista
+   e que implementa os métodos abstratos de Lista
+   usando um array. Isto é, no construtor, você deverá
+   criar um array para Objectcom tamanho igual à
+   capacidade máxima informada e depois usar esse array
+   para fazer suas adições de elementos, leituras e
+   remoções.
+
+2) Crie um unit test para sua classe ListaSequencial.
+   No teste, você adicionará 3 elementos,
+   pedirá para ler o tamanho e verificará que será
+   igual a 3, depois lerá o elemento da posição 1 e
+   verificará ser exatamente o segundo elemento
+   adicionado, depois removerá um elemento e checará
+   o tamanho, etc. etc. etc.
+
+3) Transforme a classe Lista em Lista<T>, onde T
+   será o tipo genérico de todos os itens a serem
+   armazenados. Idem para ListaSequencial<T>.
+
+4) Modifique seu unit test para ListaSequencial de
+   Livros. (Crie uma classe Livro muito básica.)
