@@ -11,9 +11,11 @@ public class ListaSequencialTest {
     private Livro livro2;
     private LivroInfantil livro3;
 
+    private final int CAPACIDADE = 200;
+
     @Before
     public void setUp() {
-        lista = new ListaSequencial<>(20);
+        lista = new ListaSequencial<>(CAPACIDADE);
 
         livro1 = new Livro("Livro1");
         livro2 = new Livro("Livro2");
@@ -43,5 +45,14 @@ public class ListaSequencialTest {
                 2, lista.getSize());
 
         assertEquals(livro3, lista.get(1));
+    }
+
+    @Test
+    public void testarListaCheia() {
+        int x = 1001;
+        while (lista.getSize() < CAPACIDADE) {
+            lista.add(new Livro("Livro " + x++));
+        }
+        lista.add(new Livro("Livro Extra"));
     }
 }
