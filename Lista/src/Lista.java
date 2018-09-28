@@ -1,4 +1,4 @@
-public abstract class Lista {
+public abstract class Lista<T extends Publicacao> {
 
     private int size;
 
@@ -13,7 +13,7 @@ public abstract class Lista {
      * Acrescenta um elemento ao final da lista.
      * @param elemento O elemento desejado.
      */
-    public void add(Object elemento) {
+    public void add(T elemento) {
         if (size == maxCapacity) {
             System.out.println("Capacidade máxima atingida. " +
                     "Não vou adicionar.");
@@ -23,7 +23,12 @@ public abstract class Lista {
         size++;
     }
 
-    public Object get(int index) {
+    /**
+     * Retorna o elemento de ordem `index` na lista
+     * @param index O índice desejado
+     * @return O elemento
+     */
+    public T get(int index) {
         if (index >= size) {
             System.out.println("Posição inválida! Nada a ser lido.");
             return null;  // o correto seria lançar uma exceção!
@@ -44,9 +49,9 @@ public abstract class Lista {
         return this.size;
     }
 
-    protected abstract void efetuarAdicaoDeElemento(Object elemento);
+    protected abstract void efetuarAdicaoDeElemento(T elemento);
 
-    protected abstract Object efetuarLeitura(int index);
+    protected abstract T efetuarLeitura(int index);
 
     protected abstract void efetuarRemocao(int index);
 }
