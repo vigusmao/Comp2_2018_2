@@ -1,13 +1,16 @@
 package dominio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Album<T extends Colecionavel> {
 
     /**
-     * Um array de Colecionavel, onde na posição k teremos o item
+     * Uma lista de objetos de tipo T, onde na posição k teremos o item
      * cujo atributo `posicao` é k; ou null, caso não tenhamos o item
      * em questão.
      */
-    private Colecionavel[] items;
+    private List<T> items;
 
     private T itemUnico;
 
@@ -30,7 +33,10 @@ public class Album<T extends Colecionavel> {
     public Album(int tamanho) {
         super();
         this.tamanho = tamanho;
-        this.items = new Colecionavel[tamanho + 1];  // descartaremos a posição 0
+        this.items = new ArrayList<>(tamanho + 1);  // descartaremos a posição 0
+        for (int i = 0; i < tamanho + 1; i++) {
+            this.items.add(null);
+        }
         this.repetidos = new int[tamanho + 1];  // idem
         this.contItems = 0;
     }
@@ -41,7 +47,7 @@ public class Album<T extends Colecionavel> {
      * @return true, se o item desejado existir no álbum; false, caso contrário
      */
     public boolean possuiItem(int posicao) {
-        return this.items[posicao] != null;
+        return this.items.get(posicao) != null;
     }
 
     /**
@@ -52,14 +58,14 @@ public class Album<T extends Colecionavel> {
      */
     public void receberItem(T item) {
         int posicao = item.getPosicao();
-        if (this.items[posicao] != null) {
+        if (this.items.get(posicao) != null) {
             // item repetido!
             this.repetidos[posicao]++;
             this.contRepetidos++;
 
         } else {
             // item inédito!
-            this.items[posicao] = item;
+            this.items.set(posicao, item);
             this.contItems++;
         }
     }
@@ -129,6 +135,6 @@ public class Album<T extends Colecionavel> {
      * @return O item que ocupa a posição dada, se existir; ou null, caso contrário
      */
     public T getItem(int posicao) {
-        return (T) this.items[posicao];
+        return this.items.get(posicao);
     }
 }
