@@ -2,11 +2,13 @@ import java.util.*;
 
 public class Banco {
 
-    private List<Conta> contasCorrentes;
+    private Map<Long, Conta> contasCorrentes;
+//    private List<Conta> contasCorrentes;
     private long seqNum;
 
     public Banco() {
-        this.contasCorrentes = new ArrayList<>();
+        this.contasCorrentes = new HashMap<>();
+//        this.contasCorrentes = new ArrayList<>();
     }
 
     /**
@@ -25,18 +27,20 @@ public class Banco {
     }
 
     public Conta getConta(long numeroDaConta) {
-        for (Conta conta : this.contasCorrentes) {
-            if (conta.getNumeroDaConta() == numeroDaConta) {
-                return conta;
-            }
-        }
-        return null;
+        return this.contasCorrentes.get(numeroDaConta);
+//        for (Conta conta : this.contasCorrentes) {
+//            if (conta.getNumeroDaConta() == numeroDaConta) {
+//                return conta;
+//            }
+//        }
+//        return null;
     }
 
     public Conta abrirConta(Pessoa dono) {
         this.seqNum++;
         Conta novaConta = new Conta(seqNum, dono);
-        this.contasCorrentes.add(novaConta);
+        this.contasCorrentes.put(novaConta.getNumeroDaConta(), novaConta);
+//        this.contasCorrentes.add(novaConta);
         return novaConta;
     }
 
@@ -44,41 +48,22 @@ public class Banco {
         Random random = new Random();
         Banco bancoUnico = new Banco();
         Pessoa magnata = new PessoaFisica(12345);
-        for (int i = 0; i < 1_000_000; i++) {
+        for (int i = 0; i < 4_000_000; i++) {
             Conta novaConta = bancoUnico.abrirConta(magnata);
             long valorAleatorio = Math.abs(random.nextLong());
             novaConta.depositar(valorAleatorio);
         }
 
-        // Vamos descobrir se há duas contas com o mesmo saldo
+        int tamanhoBusca = 100_000_000;
         long inicio = System.currentTimeMillis();
-        int nContas = bancoUnico.contasCorrentes.size();
-
-        Map<Double, Conta> contaBySaldo = new HashMap<>();
-        boolean encontrei = false;
-
-        for (int i = 0; i < nContas; i++) {
-            Conta conta = bancoUnico.contasCorrentes.get(i);
-            double saldo = conta.getSaldo();
-            Conta contaJaVista = contaBySaldo.get(saldo);
-            if (contaJaVista != null) {
-                // ja existia uma conta com esse mesmo saldo!!!!!!!
-                System.out.printf("Encontrei! As contas " +
-                            "%d e %d têm ambas o saldo %.2f\n",
-                            conta.getNumeroDaConta(),
-                            contaJaVista.getNumeroDaConta(),
-                            saldo);
-                encontrei = true;
-                break;
-            } else {
-                contaBySaldo.put(saldo, conta);
+        for (int numero = 5_000_000; numero < 5_000_000 + tamanhoBusca; numero++) {
+            Conta conta = bancoUnico.getConta(numero);
+            if (conta != null && conta.getNumeroDaConta() < 10) {
+                System.out.println("Encontrei conta com numero pequeno!");
             }
         }
-
-        if (!encontrei) {
-            System.out.println("Não encontrei!");
-        }
         long duracao = System.currentTimeMillis() - inicio;
-        System.out.printf("Duracao = %d milissegundos\n", duracao);
+        System.out.printf("Fiz %d buscas e levei %d milissegundos",
+                tamanhoBusca, duracao);
     }
 }
