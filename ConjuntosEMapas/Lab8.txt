@@ -1,0 +1,50 @@
+1) Escreva uma função static em uma classe
+Principal que receba como parâmetro uma
+List<Integer> e retorne o elemento
+mais frequente dessa lista.
+
+2) No main(), inicialize um Random
+com semente 1234 e crie uma lista de
+n=100_000 inteiros.
+Descubra o inteiro mais frequente.
+
+3) Brinque com os valores de n,
+medindo os tempos.
+
+
+
+Map<Integer, Integer>
+
+chave   valor
+12 ---> 20000
+15 ---> xxx 457
+56 ---> 29
+
+mapa.put(15, 457);
+
+
+Map<Integer, Aluno>
+
+chave   valor
+12 ---> aluno @ endereço 1234
+15 ---> aluno @ endereço 45634ff
+56 ---> aluno @ endereço 1232
+
+Aluno aluno = mapa.get(15);
+aluno.setCRA(8.0);
+// não preciso recolocar no mapa com put
+
+Aluno outroAluno = turma.getRepresentante();
+mapa.put(15, outroAluno);
+
+
+
+
+
+
+
+
+
+
+
+
