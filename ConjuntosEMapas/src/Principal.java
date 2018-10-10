@@ -2,6 +2,29 @@ import java.util.*;
 
 public class Principal {
 
+    public static Integer encontrarElementoMaisFrequenteNaive(
+            List<Integer> lista) {
+
+        int maxCount = 0;
+        Integer maxCountElement = null;
+
+        for (int i = 0; i < lista.size(); i++) {
+            int elemento = lista.get(i);
+            int count = 0;
+            for (int j = 0; j < lista.size(); j++) {
+                if (lista.get(j) == elemento) {
+                    count++;
+                    if (count > maxCount) {
+                        maxCount = count;
+                        maxCountElement = elemento;
+                    }
+                }
+            }
+        }
+
+        return maxCountElement;
+    }
+
     public static void encontrarParQueSomaKNaive(List<Integer> numeros,
                                                  int somaDesejada) {
         for (int i = 0; i < numeros.size(); i++) {
@@ -37,11 +60,11 @@ public class Principal {
     }
 
     public static void main(String[] args) {
-        Random random = new Random();
+        Random random = new Random(1234);
         List<Integer> lista = new ArrayList<>();
 
-        int tamanhoDesejado = 640_000;
-        int maxIntSorteado = 6_000_000;
+        int tamanhoDesejado = 100_000;
+        int maxIntSorteado = 1_000_000;
 
         for (int i = 0; i < tamanhoDesejado; i++) {
             lista.add(random.nextInt(maxIntSorteado));
@@ -54,10 +77,18 @@ public class Principal {
 //        duracao = System.currentTimeMillis() - inicio;
 //        System.out.printf("Duracao (naive) = %d milissegundos\n", duracao);
 
+//        inicio = System.currentTimeMillis();
+//        encontrarParQueSomaKUsandoSet(lista, 1000);
+//        duracao = System.currentTimeMillis() - inicio;
+//        System.out.printf("Duracao (com hash set) = %d milissegundos\n", duracao);
+
         inicio = System.currentTimeMillis();
-        encontrarParQueSomaKUsandoSet(lista, 1000);
+        EncontradorDeMaisFrequente<Integer> encontrador = new EncontradorDeMaisFrequente<>();
+        Integer resultado = encontrador.encontrarElementoMaisFrequente(lista);
         duracao = System.currentTimeMillis() - inicio;
-        System.out.printf("Duracao (com hash set) = %d milissegundos\n", duracao);
+        System.out.printf("Mais frequente --> %d\n",
+                resultado);
+        System.out.printf("Duracao = %d milissegundos\n", duracao);
 
     }
 }
