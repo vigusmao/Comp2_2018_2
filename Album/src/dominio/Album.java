@@ -1,9 +1,13 @@
 package dominio;
 
+import exception.TamanhoInvalidoException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Album<T extends Colecionavel> {
+
+    public final int MAX_SIZE = 1000;
 
     /**
      * Uma lista de objetos de tipo T, onde na posição k teremos o item
@@ -30,10 +34,17 @@ public class Album<T extends Colecionavel> {
     /**
      * @param tamanho O número total de items do álbum.
      */
-    public Album(int tamanho) {
+    public Album(int tamanho) throws TamanhoInvalidoException {
         super();
         this.tamanho = tamanho;
+
+        if (tamanho < 0 || tamanho > 1000) {
+            throw new TamanhoInvalidoException(
+                    String.format("Tamanho: %d", tamanho));
+        }
+
         this.items = new ArrayList<>(tamanho + 1);  // descartaremos a posição 0
+
         for (int i = 0; i < tamanho + 1; i++) {
             this.items.add(null);
         }
