@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class CalculadoraMedias {
 
     private static float calcularMediaDaTurma(String nomeDoArquivo)
-            throws FileNotFoundException {
+            throws FileNotFoundException, ArquivoCorrompidoException {
 
         File f = new File(nomeDoArquivo);
         Scanner sc = null;
@@ -32,9 +32,7 @@ public class CalculadoraMedias {
 
             if (quantLinhasInvalidas > quantNotas) {
                 // ToDo criar a classe da exceção abaixo
-                throw new ArquivoCorrompidoException(
-                        String.format("O arquivo tem " +
-                            "%d linhas inválidas", quantLinhasInvalidas));
+                throw new ArquivoCorrompidoException(quantLinhasInvalidas);
             }
 
             return soma / quantNotas;
@@ -47,16 +45,23 @@ public class CalculadoraMedias {
 
 
     public static void main(String[] args) {
+        while (true) {
+            // ToDo criar o método que lê do teclado o nome do arquivo
+            String nomeArquivo = lerNomeArquivoDoTeclado();
 
-        // ToDo envolver as próximas duas linhas num loop
-        // ToDo criar o método que lê do teclado o nome do arquivo
-        String nomeArquivo = lerNomeArquivoDoTeclado();
-        float media = calcularMediaDaTurma(nomeArquivo);
-        // ToDo capturar FileNotFoundException e se manter no loop
-        // ToDo sair do loop por uma ArquivoCorrompidoException
-        // ToDo sair do loop se a média foi obtida corretamente
+            try {
+                float media = calcularMediaDaTurma(nomeArquivo);
+                // ToDo imprime a media
+                break;
 
-        System.out.printf("Media = %.2f\n", media);
-        // ToDo se houve ArquivoCorrompidoException, mostrar msg
+            } catch (FileNotFoundException e) {
+                // ToDo diz para o usuário digitar novamente
+
+            } catch (ArquivoCorrompidoException e) {
+                int quantInvalidas = e.getQuantLinhasInvalidas();
+                // ToDo imprime quantidade de linhas inválidas
+                break;
+            }
+        }
     }
 }

@@ -16,10 +16,9 @@ Calculando a média da turma...
 (6) Ao final do arquivo de notas, retorne a média das notas
     lidas, se a quantidade de linhas inválidas for
     menor ou igual à quantidade de notas válidas.
-    Caso contrário, lance uma ArquivoCorrompidoException,
-    em cuja mensagem você dirá quantas linhas inválidas
-    foram lidas.
+    Caso contrário, lance uma ArquivoCorrompidoException.
 
 (7) No main(), se a média foi retornada corretamente,
     imprima essa média. Caso contrário, imprima
-    a mensagem da exceção que foi capturada.
+    a quantidade de linhas inválidas informada pela
+    ArquivoCorrompidoException.
