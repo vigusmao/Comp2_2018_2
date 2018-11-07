@@ -2,6 +2,7 @@ package teste;
 
 import dominio.Album;
 import dominio.Figurinha;
+import exception.TamanhoInvalidoException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,6 +21,18 @@ public class AlbumTest {
     public void setUp() throws Exception {
         album = new Album(tamanho);
         figurinhaMuitoRepetida = new Figurinha(11);
+    }
+
+    @Test
+    public void testeCriacaoAlbumComTamanhoInvalido() {
+        try {
+            Album<Figurinha> meuAlbum = new Album<>(-100);
+            fail("Uma TamanhoInvalidoException deve ser lançada " +
+                    "se o tamanho do album for negativo!");
+
+        } catch (TamanhoInvalidoException e) {
+            // OK!!!!!!! Aconteceu o que eu queria!!!!!!
+        }
     }
 
     @Test
