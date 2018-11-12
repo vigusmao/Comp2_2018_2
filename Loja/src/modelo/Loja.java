@@ -1,26 +1,26 @@
 package modelo;
 
-public abstract class Loja {
+public abstract class Loja<V extends Vendavel, T extends Transportador> {
 
     private static final int MAX_ITEMS_ESTOQUE = 1000;
 
-    private Transportador transportador;
+    protected T transportador;
 
     private Vendavel[] vitrine;
 
     private int contItemsNaVitrine;
 
-    protected Loja(Transportador transportador) {
+    protected Loja(T transportador) {
         this.transportador = transportador;
         this.vitrine = new Vendavel[MAX_ITEMS_ESTOQUE];
         this.contItemsNaVitrine = 0;
     }
 
-    public void adicionarItemAVitrine(Vendavel item) {
+    public void adicionarItemAVitrine(V item) {
         this.vitrine[this.contItemsNaVitrine++] = item;
     }
 
-    public void efetuarVenda(Vendavel item,
+    public void efetuarVenda(V item,
                              String enderecoDeEntrega,
                              Pessoa comprador) {
 
@@ -52,7 +52,7 @@ public abstract class Loja {
                 "de %.2f reais...\n", descricao, preco);
     }
 
-    public Vendavel getItemVitrine(int posicao) {
-        return this.vitrine[posicao];
+    public V getItemVitrine(int posicao) {
+        return (V) this.vitrine[posicao];
     }
 }

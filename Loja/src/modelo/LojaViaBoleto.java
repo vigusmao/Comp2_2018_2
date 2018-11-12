@@ -1,14 +1,19 @@
 package modelo;
 
-public class LojaViaBoleto extends Loja {
+public class LojaViaBoleto<T extends Transportador>
+        extends Loja<Livro, T> {
 
-    protected LojaViaBoleto(Transportador transportador) {
+    protected LojaViaBoleto(T transportador) {
         super(transportador);
     }
 
     @Override
     protected void receberPagamento(Pessoa comprador, float preco) {
         emitirBoleto(preco);
+    }
+
+    public T getMeuTransportador() {
+        return transportador;
     }
 
     private void emitirBoleto(float preco) {

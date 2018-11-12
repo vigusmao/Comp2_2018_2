@@ -14,7 +14,7 @@ public class Principal {
         joao.respirar();  // qualquer Aluno é uma Pessoa, portanto respira
         // Mas não poderíamos fazer, por exemplo, "joao.estudar()", porque nem toda Pessoa é Aluno.
 
-        Loja minhaLoja;
+        Loja<Livro, Pessoa> minhaLoja;
 //        minhaLoja = new LojaViaCartao(joao);
         minhaLoja = FabricaDeLojas.obterLoja(joao);
 
@@ -36,7 +36,7 @@ public class Principal {
 
         for (int i = 1; i <= 5; i++) {
             Caminhao caminhao = new Caminhao("Scannia", 2000 + i);
-            minhaLoja.adicionarItemAVitrine(caminhao);
+//            minhaLoja.adicionarItemAVitrine(caminhao);
         }
 
         System.out.println(minhaLoja.getVitrineAsString());

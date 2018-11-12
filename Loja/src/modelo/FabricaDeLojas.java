@@ -18,7 +18,7 @@ public class FabricaDeLojas {
      * @param transportador O transportador da loja que será retornada
      * @return Uma Loja
      */
-    public static Loja obterLoja(Transportador transportador) {
+    public static Loja<Livro, Pessoa> obterLoja(Transportador transportador) {
         Loja loja;
         if (contLojasCriadas < MAX_LOJAS) {
             loja = new LojaViaBoleto(transportador);
